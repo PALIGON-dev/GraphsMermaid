@@ -15,4 +15,7 @@ def get_commits(repo_path, cutoff_date):
         parents = parts[1:-1]
         timestamp = int(parts[-1])
         commits.append((commit_hash, parents, timestamp))
-    return commits
+
+    commits.sort(key=lambda x: x[2])
+    numbered_commits = [(i + 1, commit[0], commit[1]) for i, commit in enumerate(commits)]
+    return numbered_commits
