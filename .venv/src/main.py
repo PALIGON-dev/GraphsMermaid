@@ -1,5 +1,6 @@
 import argparse
 import subprocess
+from datetime import datetime
 
 def get_commits(repo_path, cutoff_date):
     result = subprocess.run(
@@ -19,3 +20,12 @@ def get_commits(repo_path, cutoff_date):
     commits.sort(key=lambda x: x[2])
     numbered_commits = [(i + 1, commit[0], commit[1]) for i, commit in enumerate(commits)]
     return numbered_commits
+
+def build_mermaid_graph(commits):
+    graph = "graph TD;\n"
+    for number, commit_hash, parents in commits:
+        graph += f"    {commit_hash[:7]}[\"{number}: {commit_hash[:7]}\"];\n"
+        for parent in parents:
+            graph += f"    {commit_hash[:7]} --> {parent[:7]};\n"
+        return graph
+
