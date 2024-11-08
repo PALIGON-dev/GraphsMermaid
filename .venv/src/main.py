@@ -21,6 +21,7 @@ def get_commits(repo_path, cutoff_date):
     numbered_commits = [(i + 1, commit[0], commit[1]) for i, commit in enumerate(commits)]
     return numbered_commits
 
+
 def build_mermaid_graph(commits):
     graph = "graph TD;\n"
     for number, commit_hash, parents in commits:
@@ -28,4 +29,30 @@ def build_mermaid_graph(commits):
         for parent in parents:
             graph += f"    {commit_hash[:7]} --> {parent[:7]};\n"
         return graph
+
+
+def save_mermaid_file(mermaid_graph, output_path):
+    with open(output_path, 'w', encoding="utf-8") as f:
+        f.write(mermaid_graph)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Визуализация графа Git")
+    parser.add_argument('-r', '--repo-path', type=str, required=True, help="Путь к репозиторию")
+    parser.add_argument('-d', '--date', type=str, required=True, help="Дата в формате YYYY-MM-DD")
+    parser.add_argument('-m', '--mermaid-path', type=str, required=True, help="mermaid-cli")
+    args = parser.parse_args()
+    try:
+        cutoff_date = datetime.strptime(args.date, '%Y-%m-%d').strftime('%Y-%m-%d')
+    except ValueError:
+        print("Неправильный формат. Напишите в формате YYYY-MM-DD.")
+        return
+
+    commits = get_commits(args.repo_path, cutoff_date)
+    graph = build_mermaid_graph(commits)
+    save_mermaid_file(graph, "graph.mmd")
+    print("Успешно сохранено в 'graph.mmd'.")
+
+if name == 'main':
+    main()
 
