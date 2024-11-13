@@ -28,4 +28,13 @@
 Этап 3: Сохранение графа в файл  
 Используется save_mermaid_file для сохранения графа типа mermaid в формат файла  
   
-Для тестирования программы были написаны тесты, скриншоты приведены ниже   
+Для тестирования программы были написаны тесты, скриншоты приведены ниже  
+![image](https://github.com/user-attachments/assets/6eb7d927-20db-4ddc-9436-858986e30bcc)
+
+![image](https://github.com/user-attachments/assets/a25326c5-bd0c-4d7f-b517-da299208c2de)
+
+![image](https://github.com/user-attachments/assets/6b8fce70-2975-40d6-a3f1-d7e31af74779)
+
+![image](https://github.com/user-attachments/assets/9213ef6d-9fd6-4fb7-9aff-b1c7847e3b5d)
+
+![image](https://github.com/user-attachments/assets/9e5b0b5e-9043-43d6-b632-3fd59f5f1854)
